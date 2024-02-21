@@ -29,8 +29,9 @@ FILES:${PN} += "${sysconfdir}/init.d/aesdsocket-start-stop.sh"
 # TODO: customize these as necessary for any libraries you need for your application
 # (and remove comment)
 TARGET_LDFLAGS += "-pthread -lrt -lpthread"
-INITSCRIPT_NAME:${PN}="S20aesdsocket-start-stop"
 INITSCRIPT_PACKAGES="${PN}"
+INITSCRIPT_NAME:${PN}="aesdsocket-start-stop.sh"
+
 
 do_configure () {
 	:
@@ -52,7 +53,7 @@ do_install () {
 	install -d ${D}${bindir}
 	install -m 0755 ${S}/aesdsocket ${D}${bindir}/
 
-	install -d ${D}${sysconfdir}/init.d
+	install -d ${D}${sysconfdir}/init.d/
 	install -m 0777 ${S}/aesdsocket-start-stop.sh ${D}${sysconfdir}/init.d/
 
 	
