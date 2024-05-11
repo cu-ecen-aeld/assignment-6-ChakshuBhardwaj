@@ -14,7 +14,7 @@ PV = "1.0+git${SRCPV}"
 # TODO: set to reference a specific commit hash in your assignment repo
 #SRCREV = "f99b82a5d4cb2a22810104f89d4126f52f4dfaba"
 
-SRCREV = "7de27222cba8a834ecba1a2a9380db81c39355ec"
+SRCREV = "41911f46af29e4c1c56a78e0982ede38c8195bbc"
 
 # This sets your staging directory based on WORKDIR, where WORKDIR is defined at 
 # https://docs.yoctoproject.org/ref-manual/variables.html?highlight=workdir#term-WORKDIR
@@ -25,12 +25,12 @@ S = "${WORKDIR}/git/server"
 # TODO: Add the aesdsocket application and any other files you need to install
 # See https://git.yoctoproject.org/poky/plain/meta/conf/bitbake.conf?h=kirkstone
 FILES:${PN} += "${bindir}/aesdsocket"
-FILES:${PN} += "${sysconfdir}/init.d/aesdsocket-start-stop.sh"
+FILES:${PN} += "${sysconfdir}/init.d/aesdsocket-start-stop"
 # TODO: customize these as necessary for any libraries you need for your application
 # (and remove comment)
 TARGET_LDFLAGS += "-pthread -lrt -lpthread"
 INITSCRIPT_PACKAGES="${PN}"
-INITSCRIPT_NAME:${PN}="aesdsocket-start-stop.sh"
+INITSCRIPT_NAME:${PN}="aesdsocket-start-stop"
 
 
 do_configure () {
@@ -51,10 +51,10 @@ do_install () {
 	# See example at https://github.com/cu-ecen-aeld/ecen5013-yocto/blob/ecen5013-hello-world/meta-ecen5013/recipes-ecen5013/ecen5013-hello-world/ecen5013-hello-world_git.bb
 
 	install -d ${D}${bindir}
-	install -m 0755 ${S}/aesdsocket ${D}${bindir}/
+	install -m 0777 ${S}/aesdsocket ${D}${bindir}/
 
 	install -d ${D}${sysconfdir}/init.d/
-	install -m 0777 ${S}/aesdsocket-start-stop.sh ${D}${sysconfdir}/init.d/
+	install -m 0777 ${S}/aesdsocket-start-stop ${D}${sysconfdir}/init.d/
 
 	
 }
